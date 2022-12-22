@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Cart extends Migration
+class CreateTransaksisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class Cart extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
-            $table->integer('jumlah');
-            $table->foreignUuid('transaksi_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->string('invoice');
+            $table->string('status')->default('pedding');
+            $table->float('total');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class Cart extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('transaksis');
     }
 }
