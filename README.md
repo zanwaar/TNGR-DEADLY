@@ -1,10 +1,11 @@
 ## Aplikasi TNGR-DEADLY
 
--   Login customer , Admin
--   Register Customer
--   Cart Product
--   Transaksi Status , belum dibayar, sudah dibayar,
--   Status Transaksi , pedding , diproses , selesai
+### Product
+-  List Product Custoner
+-  Detail Product Custoner
+
+### Cart
+- List Keranjang
 
 ## Installation
 
