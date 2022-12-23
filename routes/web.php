@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Product\HomeDetailProduct;
 use App\Http\Livewire\Product\HomeProduct;
+use App\Http\Livewire\Profile\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +26,4 @@ Route::get('/', function () {
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('product-detail', HomeDetailProduct::class)->name('product-detail');
 Route::get('products', HomeProduct::class)->name('products');
-
-Route::get('/home', function () {
-    echo "home";
-});
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', Profile::class)->name('home');
