@@ -26,4 +26,4 @@ Route::get('/', function () {
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('product-detail', HomeDetailProduct::class)->name('product-detail');
 Route::get('products', HomeProduct::class)->name('products');
-Route::get('/home', Profile::class)->name('home');
+Route::get('/home', Profile::class)->name('home')->middleware('role:admin');
