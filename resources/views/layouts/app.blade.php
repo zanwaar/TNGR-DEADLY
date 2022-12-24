@@ -189,27 +189,27 @@
                         @endif
                     @else
                         <!-- <div class="dropdown me-2">
-                            <a class="text-decoration-none dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              <span class="h5"> {{ Auth::user()->name }}</span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                  {{ __('Logout') }}
+                                <a class="text-decoration-none dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <span class="h5"> {{ Auth::user()->name }}</span>
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                  @csrf
-                                </form>
-                              </li>
-                            </ul>
-                          </div> -->
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                  <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                      {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                      @csrf
+                                    </form>
+                                  </li>
+                                </ul>
+                              </div> -->
                         <!-- <button type="button" class="btn btn-primary btn-sm  px-3 position-relative">
-                            Chart
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                              99+
-                              <span class="visually-hidden">unread messages</span>
-                            </span>
-                          </button> -->
+                                Chart
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                  99+
+                                  <span class="visually-hidden">unread messages</span>
+                                </span>
+                              </button> -->
                         <a class="btn btn-primary btn-sm  px-3" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
@@ -247,6 +247,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 
 </html>

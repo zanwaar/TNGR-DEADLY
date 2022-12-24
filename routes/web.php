@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Product\AdminListProduct;
 use App\Http\Livewire\Product\HomeDetailProduct;
 use App\Http\Livewire\Product\HomeProduct;
 use App\Http\Livewire\Profile\Profile;
@@ -27,3 +28,5 @@ Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->nam
 Route::get('product-detail', HomeDetailProduct::class)->name('product-detail');
 Route::get('products', HomeProduct::class)->name('products');
 Route::get('/home', Profile::class)->name('home')->middleware('role:admin');
+
+Route::get('adminproducts', AdminListProduct::class)->name('adminproducts');
