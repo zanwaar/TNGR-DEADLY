@@ -15,17 +15,16 @@
                     </div>
                     <div class="col-md-9">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+                            @forelse ($data as $index => $bg)
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <img src="{{ url('/product/baju1.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
+                                    <img src="{{$bg->foto_url}}" alt="" width="100%" height="300px" srcset="">
 
                                     <div class="card-body">
 
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <a href="{{ route('product-detail') }}"
-                                                    class="btn btn-sm btn-outline-secondary">View</a>
+                                                <a href="{{ route('product-detail', $bg->id) }}" class="btn btn-sm btn-outline-secondary">View</a>
 
                                             </div>
                                             <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
@@ -33,17 +32,16 @@
                                     </div>
                                 </div>
                             </div>
+                            @empty
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <img src="{{ url('/product/celana1.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
+                                    <img src="{{ url('/product/baju1.jpg') }}" alt="" width="100%" height="300px" srcset="">
 
                                     <div class="card-body">
 
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
+                                                <a href="{{ route('product-detail') }}" class="btn btn-sm btn-outline-secondary">View</a>
 
                                             </div>
                                             <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
@@ -51,137 +49,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/celana2.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
+                            @endforelse
 
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/baju2.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/celana3.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/baju3.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/baju4.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To
-                                                Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/celana4.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To
-                                                Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/celana5.jpg') }}" alt="" width="100%"
-                                        height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary">View</button>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To
-                                                Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class customer extends Model
+class Customer extends Model
 {
     use HasFactory;
     use Uuid;
@@ -31,4 +31,3 @@ class customer extends Model
      */
     protected $guarded = [];
 }
-

@@ -2,12 +2,24 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Models\Kategori;
+use App\Models\Product;
 use Livewire\Component;
 
 class HomeDetailProduct extends Component
 {
     public $counter;
     public $size;
+    public $state = [];
+    public $product;
+    public $ktg;
+    public function mount(Product $product)
+    {
+        $this->state = $product->toArray();
+        $this->ktg = Kategori::find($this->state['kategori_id']);
+        $this->counter = 1;
+        $this->size = 1; //default value 
+    }
 
     public function increment()
     {
@@ -23,11 +35,6 @@ class HomeDetailProduct extends Component
         return $this->counter -= $this->size;
     }
 
-    public function mount()
-    {
-        $this->counter = 1;
-        $this->size = 1; //default value 
-    }
     public function render()
     {
         return view('livewire.product.home-detail-product');

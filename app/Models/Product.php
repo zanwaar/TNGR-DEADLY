@@ -5,6 +5,7 @@ namespace App\Models;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -30,4 +31,21 @@ class Product extends Model
      * @var array
      */
     protected $guarded = [];
+    protected $appends = [
+        'foto_url',
+    ];
+
+
+    public function getFotoUrlAttribute()
+    {
+        if ($this->foto && Storage::disk('products')->exists($this->foto)) {
+            return Storage::disk('products')->url($this->foto);
+        }
+
+        return asset('1.jpg');
+    }
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }
