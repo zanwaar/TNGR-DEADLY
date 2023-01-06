@@ -15,10 +15,10 @@ class Cart extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('product_id')->constrained();
             $table->integer('jumlah');
-            $table->foreignUuid('transaksi_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->uuid('transaksi_id')->nullable();
             $table->timestamps();
         });
     }

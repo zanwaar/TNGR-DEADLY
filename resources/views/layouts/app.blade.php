@@ -133,9 +133,7 @@
                 <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                 </form> -->
-                <button type="button" class="btn btn-primary btn-sm me-3">
-                    Keranjang <span class="badge text-bg-warning">4</span>
-                </button>
+                <livewire:keranjang.total-keranjang />
                 <div class="dropdown text-end">
                     <a href="#" class="d-block btn btn-primary btn-sm text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}

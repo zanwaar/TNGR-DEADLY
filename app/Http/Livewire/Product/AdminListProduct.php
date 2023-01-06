@@ -90,7 +90,7 @@ class AdminListProduct extends AppComponent
         $user->delete();
 
         $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'User deleted successfully!']);
-    }
+    } 
     public function getProductProperty()
     {
         return Product::latest()->with(['kategori'])

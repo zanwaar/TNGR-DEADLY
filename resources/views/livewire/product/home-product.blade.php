@@ -7,9 +7,11 @@
                     <div class="col-md-3">
                         <ul class="list-group sticky-top ">
                             <p class="mt-2 fs-3 fw-bold">Kategori</p>
-                            <li class="list-group-item active " aria-current="true">Baju</li>
-                            <li class="list-group-item">Celana</li>
-                            <li class="list-group-item">Aksesoris</li>
+
+                            <li class="list-group-item @if($filter == null) active @endif  " wire:click=" filter" aria-current="true">All </li>
+                            @foreach($kategori as $bg)
+                            <li class="list-group-item  @if($filter == $bg->kategori) active @endif " wire:click="filter('{{ $bg->kategori }}')">{{ $bg->kategori  }}</li>
+                            @endforeach
                         </ul>
 
                     </div>
@@ -24,33 +26,24 @@
 
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
-                                                <a href="{{ route('product-detail', $bg->id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                                <a href="{{ route('product-detail', $bg->id) }}" class="btn btn-sm btn-primary">Beli</a>
 
                                             </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
+                                            <h6 class="dispaly-6 fw-bold my-3">Rp @convert($bg->harga)</h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             @empty
                             <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="{{ url('/product/baju1.jpg') }}" alt="" width="100%" height="300px" srcset="">
-
-                                    <div class="card-body">
-
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="{{ route('product-detail') }}" class="btn btn-sm btn-outline-secondary">View</a>
-
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-secondary">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 class="mt-5">Product Tidak Ada</h3>
                             </div>
                             @endforelse
 
+                        </div>
+                        <div class="div mt-3">
+
+                            {!! $data->links() !!}
                         </div>
                     </div>
                 </div>

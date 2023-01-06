@@ -14,13 +14,14 @@
                 <h4 class="text-uppercase text-black-50">Kategori {{$ktg->kategori}}</h4>
                 <h1 class="display-5">{{$state['nama']}}</h1>
                 <h3 class="dispaly-6 fw-bold my-3">Rp @convert($state['harga'])</h3>
-                <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore omnis fugiat voluptates voluptatum tenetur placeat, sit in magnam nostrum, expedita sint illo modi aliquid architecto temporibus provident, ullam consequatur nobis?</p>
+                <p class="lead">{{$state['deskripsi']}}</p>
 
                 <div class="btn-group">
                     <button wire:click="increment" class="btn btn-sm btn-outline-dark px-3">+</button>
                     <button class="btn btn-sm btn-outline-dark px-3 fw-bold">{{ $counter }}</button>
                     <button wire:click="decrement" class="btn btn-sm btn-outline-dark px-3">-</button>
                 </div>
+                <button wire:click="createChart" class="btn btn-sm btn-dark px-3">add to cart</button>
             </div>
         </div>
     </div>

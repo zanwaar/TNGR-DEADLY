@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Product;
 
+use App\Models\Cart;
 use App\Models\Kategori;
 use App\Models\Product;
+use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class HomeDetailProduct extends Component
@@ -34,7 +37,29 @@ class HomeDetailProduct extends Component
         }
         return $this->counter -= $this->size;
     }
+    public function createChart()
+    {
+        $user = Auth::user();
+        $cart = Cart::where('product_id', $this->state['id'])->first();
 
+        if (!$user) {
+            return $this->dispatchBrowserEvent('alert-danger', ['message' => 'sorry, you are not logged in']);
+        }
+        if (!$cart) {
+            Cart::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $this->state['id'],
+                'jumlah' => $this->counter,
+            ]);
+            $this->emit('addcart');
+            $this->dispatchBrowserEvent('alert-success', ['message' => 'added successfully!']);
+        } else {
+            $cart->update([
+                'jumlah' => $this->counter,
+            ]);
+            $this->emit('addcart');
+        }
+    }
     public function render()
     {
         return view('livewire.product.home-detail-product');

@@ -3,6 +3,7 @@
 use App\Http\Livewire\Customer\ListCustomer;
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\Kategori\ListKategori;
+use App\Http\Livewire\Keranjang\ListKeranjang;
 use App\Http\Livewire\Order\Order;
 use App\Http\Livewire\Product\AdminListProduct;
 use App\Http\Livewire\Product\HomeDetailProduct;
@@ -36,10 +37,8 @@ Route::get('products', HomeProduct::class)->name('products');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-
-
-
     // Admin Router
+    Route::get('keranjang', ListKeranjang::class)->name('keranjang');
     Route::get('transaksi', Transaksi::class)->name('transaksi');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('reports', Reports::class)->name('reports');
