@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class ListKeranjang extends Component
 {
+    public $total;
     public function getCartProperty()
     {
         return Cart::where('user_id', Auth::user()->id)
