@@ -38,11 +38,13 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     // Admin Router
+    Route::get('profile', Profile::class)->name('profile');
     Route::get('keranjang', ListKeranjang::class)->name('keranjang');
     Route::get('transaksi', Transaksi::class)->name('transaksi');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('reports', Reports::class)->name('reports');
     Route::get('orders', Order::class)->name('orders');
+
     Route::get('listkategori', ListKategori::class)->name('listkategori')->middleware('role:admin');
     Route::get('listproducts', AdminListProduct::class)->name('listproducts')->middleware('role:admin');
     Route::get('listcustomers', ListCustomer::class)->name('listcustomers')->middleware('role:admin');

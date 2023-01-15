@@ -42,7 +42,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = [ 
         'password', 'remember_token',
     ];
 
@@ -55,7 +55,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function list()
+    public function customer()
     {
         return $this->hasOne(Customer::class);
     }

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    @stack('css')
     @livewireStyles
 </head>
 
@@ -20,7 +21,7 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+        <span></span>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -65,6 +66,12 @@
                             <a class="nav-link {{ request()->is('listcustomers') ? 'active' : '' }}" aria-current="page" href="{{route('listcustomers')}}">
                                 <span data-feather="users" class="align-text-bottom"></span>
                                 Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('profile') ? 'active' : '' }}" aria-current="page" href="{{route('profile')}}">
+                                <span data-feather="user" class="align-text-bottom"></span>
+                                Profile
                             </a>
                         </li>
                     </ul>
@@ -139,7 +146,7 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu text-small">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{route('profile')}}">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

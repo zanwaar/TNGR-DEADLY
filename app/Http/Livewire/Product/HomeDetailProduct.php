@@ -40,7 +40,9 @@ class HomeDetailProduct extends Component
     public function createChart()
     {
         $user = Auth::user();
-        $cart = Cart::where('product_id', $this->state['id'])->first();
+        $cart = Cart::where('product_id', $this->state['id'])
+            ->where('transaksi_id', null)
+            ->first();
 
         if (!$user) {
             return $this->dispatchBrowserEvent('alert-danger', ['message' => 'sorry, you are not logged in']);
@@ -57,6 +59,7 @@ class HomeDetailProduct extends Component
             $cart->update([
                 'jumlah' => $this->counter,
             ]);
+            $this->dispatchBrowserEvent('alert-success', ['message' => 'added successfully!']);
             $this->emit('addcart');
         }
     }

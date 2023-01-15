@@ -100,8 +100,21 @@
     </div>
 </div>
 
+@push('css')
+<link href="{{ asset('toastr.min.css') }}" rel="stylesheet">
+@endpush
 @push('js')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<script src="{{ asset('toastr.min.js') }}">
+</script>
 <script language="JavaScript">
+    $(document).ready(function() {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "progressBar": true
+        };
+    });
     var myDelete = new bootstrap.Modal("#delete");
 
     window.addEventListener("show-delete-modal", function(event) {
@@ -110,6 +123,10 @@
 
     window.addEventListener("hide-delete-modal", function(event) {
         myDelete.hide();
+        toastr.success(event.detail.message, 'Success!');
+    });
+    window.addEventListener("hide-form", function(event) {
+        toastr.success(event.detail.message, 'Success!');
     });
 </script>
 @endpush

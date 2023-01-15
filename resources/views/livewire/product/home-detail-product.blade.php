@@ -17,12 +17,37 @@
                 <p class="lead">{{$state['deskripsi']}}</p>
 
                 <div class="btn-group">
-                    <button wire:click="increment" class="btn btn-sm btn-outline-dark px-3">+</button>
-                    <button class="btn btn-sm btn-outline-dark px-3 fw-bold">{{ $counter }}</button>
                     <button wire:click="decrement" class="btn btn-sm btn-outline-dark px-3">-</button>
+                    <button class="btn btn-sm btn-outline-dark px-3 fw-bold">{{ $counter }}</button>
+                    <button wire:click="increment" class="btn btn-sm btn-outline-dark px-3">+</button>
                 </div>
                 <button wire:click="createChart" class="btn btn-sm btn-dark px-3">add to cart</button>
             </div>
         </div>
     </div>
 </div>
+@push('css')
+<link href="{{ asset('toastr.min.css') }}" rel="stylesheet">
+@endpush
+@push('js')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<script src="{{ asset('toastr.min.js') }}">
+</script>
+
+<script language="JavaScript">
+    $(document).ready(function() {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "progressBar": true
+        };
+    });
+
+    window.addEventListener("alert-success", function(event) {
+        toastr.success(event.detail.message, 'Success!');
+    });
+    window.addEventListener("alert-danger", function(event) {
+        toastr.error(event.detail.message, 'Gagal!');
+    });
+</script>
+@endpush

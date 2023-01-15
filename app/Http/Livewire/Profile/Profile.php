@@ -2,57 +2,47 @@
 
 namespace App\Http\Livewire\Profile;
 
-use Illuminate\Support\Facades\Storage;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class Profile extends Component
 {
-    use WithFileUploads;
-
-    public $image;
-
     public $state = [];
+    public $mcs;
 
     public function mount()
     {
-        $this->state = auth()->user()->only(['name', 'email']);
+        $this->mcs = Customer::where('user_id', Auth::user()->id)->first();
+        if ($this->mcs !== null) {
+            $this->state =  $this->mcs->toArray();
+        }
     }
 
-    public function updatedImage()
+    public function update()
     {
-        $this->validate([
-            'image' => 'image', // 1MB Max
-        ]);
+        $cs = Customer::where('user_id', Auth::user()->id)->first();
 
-        $previousPath = auth()->user()->avatar;
-        $path = $this->image->store('/', 'avatars');
-        auth()->user()->update(['avatar' => $path]);
-        Storage::disk('avatars')->delete($previousPath);
-        $this->dispatchBrowserEvent('alert', ['message' => 'Profile changed successfully!']);
+        if ($cs === null) {
+            $validatedData = Validator::make($this->state, [
+                'nohp' => 'required',
+                'alamat' => 'required',
+            ])->validate();
+            $validatedData['user_id'] = Auth::user()->id;
+            Customer::create($validatedData);
+            $this->dispatchBrowserEvent('hide-form', ['message' => 'added successfully!']);
+        } else {
+            $validatedData = Validator::make($this->state, [
+                'nohp' => 'required',
+                'alamat' => 'required',
+            ])->validate();
+            $cs->update($validatedData);
+
+            $this->dispatchBrowserEvent('hide-form', ['message' => 'updated successfully!']);
+        }
     }
 
-    public function updateProfile(UpdatesUserProfileInformation $updater)
-    {
-        $updater->update(auth()->user(), [
-            'name' => $this->state['name'],
-            'email' => $this->state['email']
-        ]);
-
-        $this->emit('nameChanged', auth()->user()->name);
-        $this->dispatchBrowserEvent('alert', ['message' => 'Profile updated successfully!']);
-    }
-
-    public function changePassword(UpdatesUserPasswords $updater)
-    {
-        $updater->update(
-            auth()->user(),
-            $attributes = Arr::only($this->state, ['current_password', 'password', 'password_confirmation'])
-        );
-
-        collect($attributes)->map(fn ($value, $key) => $this->state[$key] = '');
-        $this->dispatchBrowserEvent('alert', ['message' => 'Password changed successfully!']);
-    }
     public function render()
     {
         return view('livewire.profile.profile');

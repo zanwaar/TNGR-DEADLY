@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Harga Product</label>
-                                    <input type="text" wire:model.defer="state.harga" class="form-control @error('harga') is-invalid @enderror " id="exampleFormControlInput1" placeholder="00000">
+                                    <input type="text" wire:model.defer="state.harga" class="form-control @error('harga') is-invalid @enderror " id="exampleFormControlInput1" placeholder="0">
                                     @error('harga')
                                     <div class="invalid-feedback mb-3">
                                         {{ $message }}
@@ -193,8 +193,22 @@
 
 </div>
 
+@push('css')
+<link href="{{ asset('toastr.min.css') }}" rel="stylesheet">
+@endpush
 @push('js')
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<script src="{{ asset('toastr.min.js') }}">
+</script>
+
 <script language="JavaScript">
+    $(document).ready(function() {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "progressBar": true
+        };
+    });
     var myFrom = new bootstrap.Modal("#from");
     var myDelete = new bootstrap.Modal("#delete");
 
@@ -208,9 +222,11 @@
 
     window.addEventListener("hide-form", function(event) {
         myFrom.hide();
+        toastr.success(event.detail.message, 'Success!');
     });
     window.addEventListener("hide-delete-modal", function(event) {
         myDelete.hide();
+        toastr.success(event.detail.message, 'Success!');
     });
 </script>
 @endpush

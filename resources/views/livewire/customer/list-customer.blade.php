@@ -29,8 +29,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama Customer</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Alamat</th>
                         <th scope="col">No Telepon</th>
+                        <th scope="col">Alamat</th>
                     </tr>
                 </thead>
                 <tbody wire:loading.class="text-muted">
@@ -41,16 +41,16 @@
                         <td>{{ $bg->name }}</td>
                         <td>{{ $bg->email }}</td>
 
-                        @if (is_null($bg->list))
-                        <td>-</td>
-                        <td>-</td>
+                        @if (is_null($bg->customer))
+                        <td><span class="badge badge text-bg-warning">Belum diisi</span></td>
+                        <td><span class="badge badge text-bg-warning">Belum diisi</span></td>
                         @else
-                        <td>{{ $bg->list->alamat}}</td>
-                        <td>{{ $bg->list->nohp}}</td>
+                        <td>{{ $bg->customer->nohp}}</td>
+                        <td>{{ $bg->customer->alamat}}</td>
                         @endif
 
 
-                       
+
                     </tr>
                     @empty
                     <tr class="text-center">

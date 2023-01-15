@@ -25,7 +25,7 @@ class ListKategori extends AppComponent
 
         // session()->flash('message', 'User added successfully!');
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User added successfully!']);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'added successfully!']);
         $this->reset();
     }
 
@@ -50,7 +50,7 @@ class ListKategori extends AppComponent
 
         $this->ktg->update($validatedData);
 
-        $this->dispatchBrowserEvent('hide-form', ['message' => 'User updated successfully!']);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'updated successfully!']);
         $this->reset();
     }
     public function confirmRemoval($id)
@@ -66,7 +66,7 @@ class ListKategori extends AppComponent
 
         $user->delete();
 
-        $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'User deleted successfully!']);
+        $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'deleted successfully!']);
     }
     public function getKategoriProperty()
     {

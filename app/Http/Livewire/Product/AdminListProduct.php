@@ -92,10 +92,19 @@ class AdminListProduct extends AppComponent
         $this->dispatchBrowserEvent('hide-delete-modal', ['message' => 'User deleted successfully!']);
     } 
     public function getProductProperty()
-    {
+    { 
         return Product::latest()->with(['kategori'])
+        ->where(function ($query) {
+            $query->whereRelation('kategori', 'kategori', 'like', '%' . $this->searchTerm . '%');
+            $query->orwhere('nama', 'like', '%' . $this->searchTerm . '%');
+            $query->orwhere('deskripsi', 'like', '%' . $this->searchTerm . '%');
+            $query->orwhere('harga', 'like', '%' . $this->searchTerm . '%');
+        })
+
             ->paginate($this->trow);
     }
+
+
     public function render()
     {
         $data = $this->product;
