@@ -29,6 +29,16 @@ class Transaksi extends AppComponent
         $this->listcount = $list->count();
         $this->dispatchBrowserEvent('show-form');
     }
+    public function confir($id)
+    {
+        $this->reset();
+        $ts =  ModelsTransaksi::where('id', $id)->first();
+        $this->ts = $ts;
+        $list = Cart::where('transaksi_id', $id)->with(['product'])->get();
+        $this->list = $list;
+        $this->listcount = $list->count();
+        $this->dispatchBrowserEvent('show-confir');
+    }
 
     public function render()
     {

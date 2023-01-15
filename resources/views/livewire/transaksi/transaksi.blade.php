@@ -49,6 +49,8 @@
                                     <div class="btn-group btn-group-sm">
                                         <a href="#" wire:click.prevent="detail('{{ $bg->id }}')"
                                             class="btn btn-info btn-sm text-white">Detail</a>
+                                        <a href="#" wire:click.prevent="confir('{{ $bg->id }}')"
+                                            class="btn btn-dark btn-sm text-white">Konfirmasi</a>
                                     </div>
                                 </td>
                             </tr>
@@ -130,6 +132,43 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="confir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Konfirmasi Pembayaran</h4>
+                        <p>Silahkan Transfer</p>
+                        <p>BRI 1265152757125</p>
+                        <p>MANDIRI 1265152757125</p>
+                        <hr>
+                        @isset($list)
+                            @for ($i = 1; $i <= $listcount; $i++)
+                                <?php $total += $list[$i - 1]->product->harga * $list[$i - 1]->jumlah; ?>
+                            @endfor
+                            <p class="mb-0">Total Dengan Pembayaran Rp @convert($total) </p>
+                        @endisset
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Bukti</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @push('css')
@@ -149,9 +188,13 @@
             };
         });
         var myFrom = new bootstrap.Modal("#from");
+        var mycon = new bootstrap.Modal("#confir");
 
         window.addEventListener("show-form", function(event) {
             myFrom.show();
+        });
+        window.addEventListener("show-confir", function(event) {
+            mycon.show();
         });
     </script>
 @endpush
