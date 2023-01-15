@@ -50,4 +50,5 @@
         toastr.error(event.detail.message, 'Gagal!');
     });
 </script>
+
 @endpush
