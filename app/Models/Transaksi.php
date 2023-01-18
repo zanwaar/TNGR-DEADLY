@@ -5,6 +5,7 @@ namespace App\Models;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Transaksi extends Model
 {
@@ -56,7 +57,16 @@ class Transaksi extends Model
             return 'Selesai';
         }
     }
-
+    protected $appends = [
+        'bukti_url',
+    ];
+    public function getBuktiUrlAttribute()
+    {
+        if ($this->bukti && Storage::disk('buktis')->exists($this->bukti)) {
+            return Storage::disk('buktis')->url($this->bukti);
+        }
+        return asset('1.jpg');
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

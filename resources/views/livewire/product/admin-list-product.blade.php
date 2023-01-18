@@ -148,7 +148,7 @@
                                     <div class="invalid-feedback mb-3">
                                         {{ $message }}
                                     </div>
-                                    @enderror
+                                    @enderror 
                                 </div>
                             </div>
                             <div class="col-md-6">

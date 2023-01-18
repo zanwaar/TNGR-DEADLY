@@ -18,6 +18,7 @@ class CreateTransaksisTable extends Migration
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('invoice');
             $table->string('status')->default('pedding');
+            $table->string('bukti')->nullable();
             $table->float('total');
             $table->timestamps();
         });

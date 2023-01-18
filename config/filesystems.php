@@ -70,6 +70,12 @@ return [
             'url' => env('APP_URL') . '/storage/products',
             'visibility' => 'public',
         ],
+        'buktis' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/buktis'),
+            'url' => env('APP_URL') . '/storage/buktis',
+            'visibility' => 'public',
+        ],
 
     ],
 

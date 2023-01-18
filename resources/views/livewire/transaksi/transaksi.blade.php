@@ -133,39 +133,67 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="confir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        wire:ignore.self>
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Konfirmasi Pembayaran</h4>
-                        <p>Silahkan Transfer</p>
-                        <p>BRI 1265152757125</p>
-                        <p>MANDIRI 1265152757125</p>
-                        <hr>
-                        @isset($list)
-                            @for ($i = 1; $i <= $listcount; $i++)
-                                <?php $total += $list[$i - 1]->product->harga * $list[$i - 1]->jumlah; ?>
-                            @endfor
-                            <p class="mb-0">Total Dengan Pembayaran Rp @convert($total) </p>
-                        @endisset
+            <form wire:submit.prevent="save">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            @isset($ts)
+                                {{ $ts->invoice }}
+                            @endisset
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Konfirmasi Pembayaran</h4>
+                            <p>Silahkan Transfer</p>
+                            <p>BRI 1265152757125</p>
+                            <p>MANDIRI 1265152757125</p>
+                            <hr>
+                            @isset($list)
+                                @for ($i = 1; $i <= $listcount; $i++)
+                                    <?php $total += $list[$i - 1]->product->harga * $list[$i - 1]->jumlah; ?>
+                                @endfor
+                                <p class="mb-0">Dengan Total Pembayaran Rp @convert($total) </p>
+                            @endisset
+                        </div>
+                        <div class="mb-3" x-data="{ isUploading: false, progress: 5 }" x-on:livewire-upload-start="isUploading = true"
+                            x-on:livewire-upload-finish="isUploading = false; progress = 5"
+                            x-on:livewire-upload-error="isUploading = false"
+                            x-on:livewire-upload-progress="progress = $event.detail.progress">
+                            <label for="formFile" class="form-label">Upload Bukti Pembayran</label>
+                            <input wire:model="bukti" class="form-control" type="file" id="formFile">
+                            <div x-show.transition="isUploading" class="progress progress-sm mt-2 rounded">
+                                <div class="progress-bar bg-primary progress-bar-striped" role="progressbar"
+                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                    x-bind:style="`width: ${progress}%`">
+                                    <span class="sr-only">100% Complete (success)</span>
+                                </div>
+                            </div>
+                        </div>
+                        @error('bukti')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                        @if ($bukti)
+                            <img src="{{ $bukti->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
+                        @else
+                            <img src="{{ $state['bukti_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                        @endif
+                        <!-- <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">foto </label>
+                                    <input type="text" wire:model.defer="state.foto" class="form-control" id="exampleFormControlInput1" placeholder="00000">
+                                </div> -->
 
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Upload Bukti</label>
-                        <input class="form-control" type="file" id="formFile">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
                     </div>
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Upload</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -195,6 +223,9 @@
         });
         window.addEventListener("show-confir", function(event) {
             mycon.show();
+        });
+        window.addEventListener("close-confir", function(event) {
+            mycon.hide();
         });
     </script>
 @endpush

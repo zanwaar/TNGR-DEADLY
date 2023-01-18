@@ -34,8 +34,6 @@ class Product extends Model
     protected $appends = [
         'foto_url',
     ];
-
-
     public function getFotoUrlAttribute()
     {
         if ($this->foto && Storage::disk('products')->exists($this->foto)) {
