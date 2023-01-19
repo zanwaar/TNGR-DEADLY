@@ -180,7 +180,7 @@
                         @if ($bukti)
                             <img src="{{ $bukti->temporaryUrl() }}" class="img d-block mt-2 w-100 rounded">
                         @else
-                            <img src="{{ $state['bukti_url'] ?? '' }}" class="img d-block mb-2 w-100 rounded">
+                            <img src="{{ $ts->bukti_url ?? '' }}" class="img d-block mb-2 w-100 rounded">
                         @endif
                         <!-- <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">foto </label>

@@ -40,7 +40,7 @@ class Product extends Model
             return Storage::disk('products')->url($this->foto);
         }
 
-        return asset('1.jpg');
+        return asset('noimage.png');
     }
     public function kategori()
     {

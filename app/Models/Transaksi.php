@@ -31,6 +31,7 @@ class Transaksi extends Model
      * @var array
      */
     protected $guarded = [];
+    const STATUS_P = 'Konfirmasi Pembayaran Telah dikirim';
     const STATUS_TRUE = 'Konfirmasi Pembayaran';
     const STATUS_FALSE = 'Sedang di proses';
     const STATUS_SELESAI = 'Selesai';
@@ -38,6 +39,7 @@ class Transaksi extends Model
     public function getStatusBadgeAttribute()
     {
         $badges = [
+            $this::STATUS_P => 'info',
             $this::STATUS_TRUE => 'warning',
             $this::STATUS_FALSE => 'primary',
             $this::STATUS_SELESAI => 'success',
@@ -49,6 +51,9 @@ class Transaksi extends Model
     {
         if ($value === 'Konfirmasi Pembayaran') {
             return 'Konfirmasi Pembayaran';
+        }
+        if ($value === 'Konfirmasi Pembayaran Telah dikirim') {
+            return 'Konfirmasi Pembayaran Telah dikirim';
         }
         if ($value === 'Sedang di proses') {
             return 'Sedang di proses';
@@ -65,7 +70,8 @@ class Transaksi extends Model
         if ($this->bukti && Storage::disk('buktis')->exists($this->bukti)) {
             return Storage::disk('buktis')->url($this->bukti);
         }
-        return asset('1.jpg');
+
+        return asset('noimage.png');
     }
     public function user()
     {

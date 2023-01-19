@@ -154,6 +154,10 @@
                             </div>
                             @enderror
                         </div>
+                        @isset($ts)
+                        <img src="{{ $ts->bukti_url ?? '' }}" class="img d-block mb-2 w-100 rounded">
+
+                        @endisset
                     </div>
                     <div class="modal-footer flex-nowrap p-0">
                         <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">close</button>

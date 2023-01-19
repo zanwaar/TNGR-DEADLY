@@ -46,14 +46,12 @@ class Transaksi extends AppComponent
     {
 
         $this->validate([
-            'bukti' => 'image', // 1MB Max
+            'bukti' => 'image',
         ]);
-        // $this->ts->update([
-        //     'bukti' => $this->bukti->filefilename
-        // ]);
-        dd($this->bukti->originalName());
+        $validatedData['status'] = 'Konfirmasi Pembayaran Telah dikirim';
+        $validatedData['bukti'] = $this->bukti->store('/', 'buktis');
+        $this->ts->update($validatedData);
         $this->dispatchBrowserEvent('close-confir');
-        // $this->bukti->store('buktis');
     }
     public function render()
     {

@@ -51,7 +51,7 @@ class AdminListProduct extends AppComponent
         $this->showEditModal = true;
 
         $this->mproduct = $product;
-
+ 
 
         $this->state = $product->toArray();
 
