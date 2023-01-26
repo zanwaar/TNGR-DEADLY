@@ -16,22 +16,8 @@ class Reports extends AppComponent
     {
         return Transaksi::latest()->with(['user'])->where('status', 'Selesai')->paginate($this->trow);
     }
-    public function generatePDF()
-
-    {
-        // Transaksi::latest()->with(['user'])->where('status', 'Selesai')->whereBetween('created_at', [$this->from, $this->to])->orderBy('created_at', 'desc');
-        $data = ['title' => 'Welcome to belajarphp.net'];
-
-        // $pdf = PDF::loadView(, $data);
-        // //return $pdf->download('laporan-pdf.pdf');
-        // //menjadi
-
-
-        return $pdfContent->stream('filename.pdf');
-    }
     public function fexcel()
     {
-
         if ($this->dateawal >= $this->dateakhir) {
             return $this->dispatchBrowserEvent('alert-danger', ['message' => 'Tanggal salah mohon periksa Kembali']);
         }
@@ -41,20 +27,18 @@ class Reports extends AppComponent
         if ($data->count() == 0) {
             return $this->dispatchBrowserEvent('alert-danger', ['message' => 'Export Gagal Data Tidak Ditemukan']);
         }
-        $nama = 'from-' . $this->dateawal . '-to-' . $this->dateakhir . '.xls';
+        // $nama = 'from-' . $this->dateawal . '-to-' . $this->dateakhir . '.xls';
         try {
-            // $data1 = $data->get()->toArray();
             $data1 = ['data' => $data->get()];
             $pdfContent = PDF::loadView('pdf.laporan', $data1)->output();
             return response()->streamDownload(
                 fn () => print($pdfContent),
-                'lapao.pdf'
+                'laporan.pdf'
             );
-            // return redirect()->route('laporan', $this->dateawal, $date);
             // return (new Laporan($this->dateawal, $date))->download($nama);
         } catch (\Throwable $th) {
-            throw $th;
-            // $this->dispatchBrowserEvent('alert-danger', ['message' => 'Gagal']);
+            // throw $th;
+            $this->dispatchBrowserEvent('alert-danger', ['message' => 'Gagal']);
         }
     }
 

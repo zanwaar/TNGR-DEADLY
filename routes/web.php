@@ -33,18 +33,18 @@ Route::get('/', function () {
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('product-detail/{product}', HomeDetailProduct::class)->name('product-detail');
 Route::get('products', HomeProduct::class)->name('products');
-Route::get('laporan-pdf/{id}/{array}', [App\Http\Controllers\HomeController::class, 'generatePDF'])->name('laporan');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    // Admin Router
-    Route::get('profile', Profile::class)->name('profile');
-    Route::get('keranjang', ListKeranjang::class)->name('keranjang');
-    Route::get('transaksi', Transaksi::class)->name('transaksi');
-    Route::get('dashboard', Dashboard::class)->name('dashboard');
-    Route::get('reports', Reports::class)->name('reports');
-    Route::get('orders', Order::class)->name('orders');
 
+    Route::get('profile', Profile::class)->name('profile');
+    // User Router
+    Route::get('keranjang', ListKeranjang::class)->name('keranjang')->middleware('role:user');
+    Route::get('transaksi', Transaksi::class)->name('transaksi')->middleware('role:user');
+    // Admin Router
+    Route::get('dashboard', Dashboard::class)->name('dashboard')->middleware('role:admin');
+    Route::get('reports', Reports::class)->name('reports')->middleware('role:admin');
+    Route::get('orders', Order::class)->name('orders')->middleware('role:admin');
     Route::get('listkategori', ListKategori::class)->name('listkategori')->middleware('role:admin');
     Route::get('listproducts', AdminListProduct::class)->name('listproducts')->middleware('role:admin');
     Route::get('listcustomers', ListCustomer::class)->name('listcustomers')->middleware('role:admin');

@@ -44,10 +44,9 @@
 </head>
 
 <body>
-    <p style="text-align:right;">Tanggal <?= date('d F Y'); ?></p>
-    <h1>Laporan Pemelian</h1>
+    <p style="text-align:right;">Tanggal <?= date('d F Y') ?></p>
+    <h1>Laporan Pembelian</h1>
     <table id="tael">
-
         <tr>
             <th>Nama</th>
             <th>Email</th>
@@ -55,16 +54,16 @@
             <th>Invoice</th>
             <th>Total</th>
         </tr>
-        <?php $total = 0 ?>
-        @foreach ($data as $m )
-        <tr>
-            <td>{{$m->user->name}}</td>
-            <td>{{$m->user->email}}</td>
-            <td>{{$m->created_at}}</td>
-            <td>{{$m->invoice}}</td>
-            <td style="text-align:right;">Rp @convert($m->total)</td>
-        </tr>
-        <?php $total += ($m->total); ?>
+        <?php $total = 0; ?>
+        @foreach ($data as $m)
+            <tr>
+                <td>{{ $m->user->name }}</td>
+                <td>{{ $m->user->email }}</td>
+                <td>{{ $m->created_at }}</td>
+                <td>{{ $m->invoice }}</td>
+                <td style="text-align:right;">Rp @convert($m->total)</td>
+            </tr>
+            <?php $total += $m->total; ?>
         @endforeach
 
         <tr>

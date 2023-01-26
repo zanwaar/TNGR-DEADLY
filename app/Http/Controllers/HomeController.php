@@ -37,12 +37,4 @@ class HomeController extends Controller
     {
         return view('product-detail');
     }
-        public function generatePDF()
-
-    {
-        $data = ['title' => 'Welcome to belajarphp.net'];
-
-        $pdf = PDF::loadView('pdf/laporan', $data);
-        return $pdf->download('laporan-pdf.pdf');
-    }
 }

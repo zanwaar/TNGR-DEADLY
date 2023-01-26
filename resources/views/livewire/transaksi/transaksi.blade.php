@@ -49,8 +49,13 @@
                                     <div class="btn-group btn-group-sm">
                                         <a href="#" wire:click.prevent="detail('{{ $bg->id }}')"
                                             class="btn btn-info btn-sm text-white">Detail</a>
-                                        <a href="#" wire:click.prevent="confir('{{ $bg->id }}')"
-                                            class="btn btn-dark btn-sm text-white">Konfirmasi</a>
+                                        @if ($bg->status === 'Sedang di proses')
+                                        @elseif ($bg->status === 'Selesai')
+                                        @else
+                                            <a href="#" wire:click.prevent="confir('{{ $bg->id }}')"
+                                                class="btn btn-dark btn-sm text-white">Konfirmasi</a>
+                                        @endif
+
                                     </div>
                                 </td>
                             </tr>
