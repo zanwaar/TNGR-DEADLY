@@ -33,7 +33,7 @@ Route::get('/', function () {
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('product-detail/{product}', HomeDetailProduct::class)->name('product-detail');
 Route::get('products', HomeProduct::class)->name('products');
-
+Route::get('laporan-pdf/{id}/{array}', [App\Http\Controllers\HomeController::class, 'generatePDF'])->name('laporan');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
