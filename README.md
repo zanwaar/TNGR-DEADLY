@@ -1,12 +1,5 @@
 ## Aplikasi TNGR-DEADLY
 
-### Product
--  List Product Custoner
--  Detail Product Custoner
-
-### Cart
-- List Keranjang
-
 ## Installation
 
 -   Clone the repository
